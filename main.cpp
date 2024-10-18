@@ -275,17 +275,36 @@ public:
             cout << "List is empty." << endl;
             return;
         }
-        for (size_t i = 0; i < current; i++)
-        {
-            /* code */
+        while (current) {
+            //prints nodes data
+            cout << current->data << " ";
+            //sets current to the next node
+            current = current->next;
+            //sets current to the next node
+            current = current->next;
         }
-        
+        //end line
+        cout << endl;
     }
 };
 //the main function
 int main() {
     //prints const values
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
+    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS << endl; // dummy statement to avoid
+    //create a list object apart of the DoublyLinkedList class
+    DoublyLinkedList list;
+    //sets list size to random
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+    //fills list with random numbers
+    for (int i = 0; i < size; ++i)
+        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    //prints list forward
+    cout << "List forward: ";
+    list.print();
+    //prints list every other element
+    cout << "List every other element: ";
+    list.every_other_element();
+
     //returns 0
     return 0;
 }
