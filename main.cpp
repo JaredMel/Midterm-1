@@ -50,25 +50,32 @@ public:
             delete newNode;
             return;
         }
-        //adds the newNode by 
+        //adds the newNode by pointing to the next node and setting it to the temp node pointing to it's next node
         newNode->next = temp->next;
+        //sets the newNode pointing to the previous to equal the temp node
         newNode->prev = temp;
+        //Checks if Node is being added at the tail
         if (temp->next)
+            //temp points to the next points to the prev and sets it to newNode
             temp->next->prev = newNode;
         else
+            //sets the tail to the newNode
             tail = newNode;
+        //sets the temp's next pointer to point at newNode
         temp->next = newNode;
     }
-
+    //the delete_val method
     void delete_val(int value) {
+        //Checks if the list is empty
         if (!head) return;
-
+        //Creates a temp node and sets it to head
         Node* temp = head;
+        //Traverses the DoublyLinkedList to find the value
         while (temp && temp->data != value)
             temp = temp->next;
-
+        //if can't find value return
         if (!temp) return;
-
+        //Checks if value is at the head
         if (temp->prev)
             temp->prev->next = temp->next;
         else
