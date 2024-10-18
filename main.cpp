@@ -140,61 +140,83 @@ public:
     }
     //the push_back method
     void push_back(int v) {
-        //
+        //creates the new node and sets it's value to v
         Node* newNode = new Node(v);
+        //checks if list is empty
         if (!tail)
+            //sets head equal to tail equal to newNode
             head = tail = newNode;
         else {
+            //sets the next pointer for tail to newNode
             tail->next = newNode;
+            //sets the prev pointer for newNode to tail
             newNode->prev = tail;
+            //sets tail to newNode
             tail = newNode;
         }
     }
 
     void push_front(int v) {
+        //creates the new node and sets it's value to v
         Node* newNode = new Node(v);
+        //checks if list is empty
         if (!head)
+            //sets head equal to tail equal to newNode
             head = tail = newNode;
         else {
+            //sets the next pointer for newNode to head
             newNode->next = head;
+            //sets the prev pointer for head to newNode
             head->prev = newNode;
+            //sets head to newNode
             head = newNode;
         }
     }
 
     void pop_front() {
+        //checks if list is empty
         if (!head) {
             cout << "List is empty." << endl;
             return;
         }
-
+        //creates temp Node and sets it to head
         Node * temp = head;
-
+        //checks if there is more than one val in the list
         if (head->next) {
+            //sets head to the next pointer for head
             head = head->next;
+            //sets the prev pointer for head to nullptr
             head->prev = nullptr;
         }
         else
+            //sets the head equal to tail equal to nullptr
             head = tail = nullptr;
+        //deletes temp node
         delete temp;
     }
-
+    //the pop_back method
     void pop_back() {
+        //checks if list is empty
         if (!tail) {
             cout << "List is empty." << endl;
             return;
         }
+        //creates temp node and sets it to tail
         Node * temp = tail;
-
+        //checks if there is more than one val in the list
         if (tail->prev) {
+            //sets tail to the pointer prev for tail
             tail = tail->prev;
+            //sets the next pointer for tail to nullptr
             tail->next = nullptr;
         }
         else
+            //sets head equal to tail equal to nullptr
             head = tail = nullptr;
+        //deletes temp node
         delete temp;
     }
-
+    //the destructor for the DoublyLinkedList class
     ~DoublyLinkedList() {
         while (head) {
             Node* temp = head;
