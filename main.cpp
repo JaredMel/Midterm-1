@@ -1,48 +1,56 @@
 #include <iostream>
 using namespace std;
-
+//Declares and Initilizes variables
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
-
+//the DoublyLinkedList Class
 class DoublyLinkedList {
 private:
+    //the Node struct
     struct Node {
+        //Declares and Initilizes attributes
         int data;
         Node* prev;
         Node* next;
+        //Node constructor
         Node(int val, Node* p = nullptr, Node* n = nullptr) {
+            //Sets attribute values
             data = val;
             prev = p;
             next = n;
         }
     };
-
+    //Declares and initilizes attributes
     Node* head;
     Node* tail;
 public:
+    //DoublyLinkedList constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
-
+    //the insert_after method
     void insert_after(int value, int position) {
+        //Checks if position is less than 0
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
         }
-
+        //Creates the new Node struct with its values set to value
         Node* newNode = new Node(value);
+        //Checks if the list is empty
         if (!head) {
             head = tail = newNode;
             return;
         }
-
+        //Creates a temp node and sets it to head
         Node* temp = head;
+        //Traverses the DoublyLinkedList to find the correct position
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next;
-
+        //Checks if position exceeds the List's size and deletes the Node
         if (!temp) {
             cout << "Position exceeds list size. Node not inserted.\n";
             delete newNode;
             return;
         }
-
+        //adds the newNode by 
         newNode->next = temp->next;
         newNode->prev = temp;
         if (temp->next)
